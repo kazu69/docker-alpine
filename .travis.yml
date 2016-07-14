@@ -7,7 +7,7 @@ services:
 
 install:
   - docker build -t alpine .
-  - docker run --name alpine -d alpine
+  - docker run --name alpine alpine echo 'Hello'
 
 script:
   - docker ps -a | grep alpine
