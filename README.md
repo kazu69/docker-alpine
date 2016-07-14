@@ -1,6 +1,8 @@
 alpine base Docker container
 ====================
 
+[![Build Status](https://travis-ci.org/kazu69/docker-alpine.svg?branch=master)](https://travis-ci.org/kazu69/docker-alpine)
+
 > You can create the docker image you need to develop in the Alpine Linux
 
 Installation
