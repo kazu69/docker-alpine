@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER kazu69 "kazu.69.web+docker@gmail.com"
+MAINTAINER kazu69
 
 RUN apk add --update \
     bash \
