@@ -11,6 +11,9 @@ RUN apk add --update \
     readline-dev \
     openssl-dev \
     zlib-dev \
+    ca-certificates \
+    tar \
+    xz \
 &&  rm -rf /var/cache/apk/*
 
 RUN apk --update add tzdata && \
