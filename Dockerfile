@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER kazu69
 
-RUN apk add --update \
+RUN apk --update add \
     bash \
     git \
     wget \
