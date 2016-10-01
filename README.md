@@ -1,7 +1,7 @@
 alpine base Docker container
 ====================
 
-[![Build Status](https://travis-ci.org/kazu69/docker-alpine.svg?branch=master)](https://travis-ci.org/kazu69/docker-alpine)
+[![Build Status](https://travis-ci.org/kazu69/docker-alpine.svg?branch=ci-base)](https://travis-ci.org/kazu69/docker-alpine)
 
 > You can create the docker image you need to develop in the Alpine Linux
 
@@ -11,7 +11,7 @@ Installation
 The easiest way to do this is to get from Docker registry
 
 ```sh
-$ docker pull kazu69/alpine:base
+$ docker pull kazu69/alpine:ci-base
 ```
 
 Also possible to use or from github to get
