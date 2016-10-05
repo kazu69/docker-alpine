@@ -63,7 +63,8 @@ RUN export GNUPGHOME="$(mktemp -d)" && \
 
 ENV PHP_INI_DIR /usr/local/etc/php
 
-RUN cd /tmp/build/php && \
+RUN mkdir -p "$PHP_INI_DIR/conf.d" && \
+      cd /tmp/build/php && \
       tar -Jxf php.tar.xz -C /tmp/build/php --strip-components=1 && \
       rm php.tar.xz && \
       ./configure \
@@ -122,6 +123,14 @@ RUN cd /tmp/build/php && \
       make clean && \
       rm -rf /tmp/build/php
 
+RUN pecl install -o -f xdebug && \
+    rm -rf /tmp/pear && \
+    echo 'zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so' > "$PHP_INI_DIR/conf.d/xdebug.ini" && \
+    echo 'xdebug.remote_enable=on' >> "$PHP_INI_DIR/conf.d/xdebug.ini" && \
+    echo 'xdebug.remote_host=172.17.42.1' >> "$PHP_INI_DIR/conf.d/xdebug.ini" && \
+    echo 'xdebug.remote_connect_back=On' >> "$PHP_INI_DIR/conf.d/xdebug.ini" && \
+    echo 'memory_limit = 128M' > "$PHP_INI_DIR/conf.d/php.ini"
+
 RUN curl -fSL $COMPOSER_INSTALLER_URL | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Build Ruby
@@ -148,7 +157,7 @@ ENV NODE_VERSION v6.7.0
 ENV NODE_DOWNLOAD_URL "https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}.tar.gz"
 ENV NODE_DOWNLOAD_SHA256 02b8ee1719a11b9ab22bef9279519efaaf31dd0d39cba4c3a1176ccda400b8d6
 
-RUN  mkdir -p /tmp/build/node && \
+RUN mkdir -p /tmp/build/node && \
     curl -fSL $NODE_DOWNLOAD_URL -o node.tar.gz && \
     echo "$NODE_DOWNLOAD_SHA256 *node.tar.gz" | sha256sum -c - && \
     tar -xzf node.tar.gz -C /tmp/build/node --strip-components=1 && \
